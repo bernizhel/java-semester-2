@@ -6,9 +6,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
-    Currently tests only MyLinkedList<String> class
- */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MyLinkedListTest {
     @DisplayName("Empty list")

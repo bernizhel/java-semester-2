@@ -2,6 +2,8 @@ package ru.vsuet.my_linked_list;
 
 import org.junit.jupiter.api.*;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /*
@@ -1031,6 +1033,126 @@ public class MyLinkedListTest {
         @Test
         public void getOutOfBounds_Null() {
             assertNull(myLinkedList.get(1));
+        }
+    }
+
+    @DisplayName("Deep object")
+    static class DeepObjectTestCase {
+        private MyLinkedList<List<String>> myLinkedList;
+
+        @BeforeEach
+        public void setUp() {
+            myLinkedList = MyLinkedList.of(
+                    TestConstants.FIRST_DEEP_OBJECT,
+                    TestConstants.SECOND_DEEP_OBJECT,
+                    TestConstants.THIRD_DEEP_OBJECT
+            );
+        }
+
+        @Test
+        public void isEmpty_False() {
+            assertFalse(myLinkedList.isEmpty());
+        }
+
+        @Test
+        public void size_Three() {
+            assertEquals(3, myLinkedList.size());
+        }
+
+        @Test
+        public void getLast_THIRD_DEEP_OBJECT() {
+            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.getLast());
+        }
+
+        @Test
+        public void getZero_FIRST_DEEP_OBJECT() {
+            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
+        }
+
+        @Test
+        public void getOne_SECOND_DEEP_OBJECT() {
+            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(1));
+        }
+
+        @Test
+        public void getTwo_THIRD_DEEP_OBJECT() {
+            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(2));
+        }
+
+        @Test
+        public void getNegative_Null() {
+            assertNull(myLinkedList.get(-1));
+        }
+
+        @Test
+        public void getOutOfBounds_Null() {
+            assertNull(myLinkedList.get(3));
+        }
+
+        @Test
+        public void updateZeroAndGetIt_FIRST_DEEP_OBJECT_UPDATED() {
+            myLinkedList.update(0, TestConstants.FIRST_DEEP_OBJECT_UPDATED);
+            assertEquals(TestConstants.FIRST_DEEP_OBJECT_UPDATED, myLinkedList.get(0));
+        }
+
+        @Test
+        public void updateOneAndGetIt_SECOND_DEEP_OBJECT_UPDATED() {
+            myLinkedList.update(1, TestConstants.SECOND_DEEP_OBJECT_UPDATED);
+            assertEquals(TestConstants.SECOND_DEEP_OBJECT_UPDATED, myLinkedList.get(1));
+        }
+
+        @Test
+        public void updateTwoAndGetIt_THIRD_DEEP_OBJECT_UPDATED() {
+            myLinkedList.update(2, TestConstants.THIRD_DEEP_OBJECT_UPDATED);
+            assertEquals(TestConstants.THIRD_DEEP_OBJECT_UPDATED, myLinkedList.get(2));
+        }
+
+        @Test
+        public void removeOne_BeDeleted() {
+            myLinkedList.remove(TestConstants.FIRST_DEEP_OBJECT);
+            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(0));
+            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(1));
+            assertNull(myLinkedList.get(2));
+        }
+
+        @Test
+        public void removeTwo_BeDeleted() {
+            myLinkedList.remove(TestConstants.SECOND_DEEP_OBJECT);
+            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
+            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(1));
+            assertNull(myLinkedList.get(2));
+        }
+
+        @Test
+        public void removeThree_BeDeleted() {
+            myLinkedList.remove(TestConstants.THIRD_DEEP_OBJECT);
+            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
+            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(1));
+            assertNull(myLinkedList.get(2));
+        }
+
+        @Test
+        public void removeOneByIndex_BeDeleted() {
+            myLinkedList.remove(0);
+            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(0));
+            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(1));
+            assertNull(myLinkedList.get(2));
+        }
+
+        @Test
+        public void removeTwoByIndex_BeDeleted() {
+            myLinkedList.remove(1);
+            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
+            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(1));
+            assertNull(myLinkedList.get(2));
+        }
+
+        @Test
+        public void removeThreeByIndex_BeDeleted() {
+            myLinkedList.remove(2);
+            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
+            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(1));
+            assertNull(myLinkedList.get(2));
         }
     }
 }

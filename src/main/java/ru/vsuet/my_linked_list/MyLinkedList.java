@@ -2,7 +2,6 @@ package ru.vsuet.my_linked_list;
 
 // TODO: Use tail node for better performance
 
-// TODO: add tests for other types of objects
 // TODO: add javadocs
 
 /*
@@ -16,11 +15,11 @@ public class MyLinkedList<T> {
     }
 
     public T getLast() {
-        Node<T> currentNode = headNode;
-        if (currentNode == null) {
+        if (headNode == null) {
             return null;
         }
 
+        Node<T> currentNode = headNode;
         while (currentNode.getNextNode() != null) {
             currentNode = currentNode.getNextNode();
         }
@@ -30,22 +29,18 @@ public class MyLinkedList<T> {
 
     public T get(int index) {
         Node<T> currentNode = headNode;
-        if (currentNode == null) {
-            return null;
-        }
-
-        int counter = 0;
+        int currentIndex = 0;
         while (true) {
-            if (counter == index) {
-                return currentNode.getValue();
-            }
-
-            currentNode = currentNode.getNextNode();
             if (currentNode == null) {
                 return null;
             }
 
-            counter++;
+            if (currentIndex == index) {
+                return currentNode.getValue();
+            }
+
+            currentNode = currentNode.getNextNode();
+            currentIndex++;
         }
     }
 
@@ -53,12 +48,12 @@ public class MyLinkedList<T> {
         Node<T> newNode = new Node<>();
         newNode.setValue(value);
 
-        Node<T> currentNode = headNode;
-        if (currentNode == null) {
+        if (headNode == null) {
             headNode = newNode;
             return;
         }
 
+        Node<T> currentNode = headNode;
         while (currentNode.getNextNode() != null) {
             currentNode = currentNode.getNextNode();
         }
@@ -69,6 +64,7 @@ public class MyLinkedList<T> {
     public void add(int index, T value) {
         Node<T> newNode = new Node<>();
         newNode.setValue(value);
+
         if (index == 0) {
             newNode.setNextNode(headNode);
             headNode = newNode;
@@ -76,34 +72,38 @@ public class MyLinkedList<T> {
         }
 
         Node<T> currentNode = headNode;
-        int counter = 1;
-        while (currentNode != null) {
-            if (counter == index) {
+        int currentIndex = 1;
+        while (true) {
+            if (currentNode == null) {
+                return;
+            }
+
+            if (currentIndex == index) {
                 newNode.setNextNode(currentNode.getNextNode());
                 currentNode.setNextNode(newNode);
                 return;
             }
 
             currentNode = currentNode.getNextNode();
-            counter++;
+            currentIndex++;
         }
     }
 
     public void update(int index, T value) {
         Node<T> currentNode = headNode;
-        int counter = 0;
+        int currentIndex = 0;
         while (true) {
             if (currentNode == null) {
                 return;
             }
 
-            if (counter == index) {
+            if (currentIndex == index) {
                 currentNode.setValue(value);
                 return;
             }
 
             currentNode = currentNode.getNextNode();
-            counter++;
+            currentIndex++;
         }
     }
 
@@ -113,7 +113,7 @@ public class MyLinkedList<T> {
         }
 
         if (headNode.getValue() == value) {
-            headNode = null;
+            headNode = headNode.getNextNode();
             return;
         }
 
@@ -140,35 +140,35 @@ public class MyLinkedList<T> {
         }
 
         if (index == 0) {
-            headNode = null;
+            headNode = headNode.getNextNode();
             return;
         }
 
         Node<T> previousNode = headNode;
         Node<T> currentNode = previousNode.getNextNode();
-        int counter = 1;
+        int currentIndex = 1;
         while (true) {
             if (currentNode == null) {
                 return;
             }
 
-            if (counter == index) {
+            if (currentIndex == index) {
                 previousNode.setNextNode(currentNode.getNextNode());
                 return;
             }
 
             previousNode = currentNode;
             currentNode = currentNode.getNextNode();
-            counter++;
+            currentIndex++;
         }
     }
 
     public int size() {
-        Node<T> currentNode = headNode;
-        if (currentNode == null) {
+        if (headNode == null) {
             return 0;
         }
 
+        Node<T> currentNode = headNode;
         int listSize = 1;
         while (currentNode.getNextNode() != null) {
             listSize++;

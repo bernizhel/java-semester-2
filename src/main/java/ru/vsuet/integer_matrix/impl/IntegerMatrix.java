@@ -4,16 +4,18 @@ import ru.vsuet.integer_matrix.interfaces.FillingStrategy;
 
 public class IntegerMatrix {
     private final int[][] matrix;
+    private final FillingStrategy fillingStrategy;
 
-    public IntegerMatrix(int rows, int columns) {
+    public IntegerMatrix(int rows, int columns, FillingStrategy fillingStrategy) {
         this.matrix = new int[rows][columns];
+        this.fillingStrategy = fillingStrategy;
     }
 
-    public IntegerMatrix(int size) {
-        this(size, size);
+    public IntegerMatrix(int size, FillingStrategy fillingStrategy) {
+        this(size, size, fillingStrategy);
     }
 
-    public void fill(FillingStrategy fillingStrategy) {
+    public void fill() {
         fillingStrategy.generate(matrix);
     }
 

@@ -8,21 +8,21 @@ import ru.vsuet.integer_matrix.interfaces.FillingStrategy;
 
 public class Main {
     public static void main(String[] args) {
-        IntegerMatrix first = new IntegerMatrix(3);
         FillingStrategy firstFillingStrategy = new RandomFillingStrategy(-15, 15);
-        testMatrix(first, firstFillingStrategy);
+        IntegerMatrix first = new IntegerMatrix(3, firstFillingStrategy);
+        testMatrix(first);
 
-        IntegerMatrix second = new IntegerMatrix(4, 2);
         FillingStrategy secondFillingStrategy = new ConstantFillingStrategy(3);
-        testMatrix(second, secondFillingStrategy);
+        IntegerMatrix second = new IntegerMatrix(4, 2, secondFillingStrategy);
+        testMatrix(second);
 
-        IntegerMatrix third = new IntegerMatrix(4, 5);
         FillingStrategy thirdFillingStrategy = new RangeFillingStrategy(1, 20, 1);
-        testMatrix(third, thirdFillingStrategy);
+        IntegerMatrix third = new IntegerMatrix(4, 5, thirdFillingStrategy);
+        testMatrix(third);
     }
 
-    private static void testMatrix(IntegerMatrix integerMatrix, FillingStrategy fillingStrategy) {
-        integerMatrix.fill(fillingStrategy);
+    private static void testMatrix(IntegerMatrix integerMatrix) {
+        integerMatrix.fill();
         System.out.println(integerMatrix);
 
         System.out.println("Sum above the main diagonal: " + integerMatrix.getSumAboveMainDiagonal());

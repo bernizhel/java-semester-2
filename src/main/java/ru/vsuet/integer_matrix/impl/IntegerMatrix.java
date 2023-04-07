@@ -1,15 +1,15 @@
-package ru.vsuet.matrix.impl;
+package ru.vsuet.integer_matrix.impl;
 
-import ru.vsuet.matrix.interfaces.FillingStrategy;
+import ru.vsuet.integer_matrix.interfaces.FillingStrategy;
 
-public class Matrix {
+public class IntegerMatrix {
     private final int[][] matrix;
 
-    public Matrix(int rows, int columns) {
+    public IntegerMatrix(int rows, int columns) {
         this.matrix = new int[rows][columns];
     }
 
-    public Matrix(int size) {
+    public IntegerMatrix(int size) {
         this(size, size);
     }
 

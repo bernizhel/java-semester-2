@@ -1,6 +1,6 @@
-package ru.vsuet.matrix.impl;
+package ru.vsuet.integer_matrix.impl;
 
-import ru.vsuet.matrix.interfaces.FillingStrategy;
+import ru.vsuet.integer_matrix.interfaces.FillingStrategy;
 
 import java.util.stream.IntStream;
 

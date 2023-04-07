@@ -25,9 +25,9 @@ public class Main {
         integerMatrix.fill(fillingStrategy);
         System.out.println(integerMatrix);
 
-        System.out.println("Sum above the main diagonal: " + integerMatrix.sumAboveMainDiagonal());
-        System.out.println("Product of the main diagonal: " + integerMatrix.productOfMainDiagonal());
-        System.out.println("Negative sum below the main diagonal: " + integerMatrix.negativeSumBelowMainDiagonal());
+        System.out.println("Sum above the main diagonal: " + integerMatrix.getSumAboveMainDiagonal());
+        System.out.println("Product of the main diagonal: " + integerMatrix.getProductOfMainDiagonal());
+        System.out.println("Negative sum below the main diagonal: " + integerMatrix.getNegativeSumBelowMainDiagonal());
 
         System.out.println();
     }

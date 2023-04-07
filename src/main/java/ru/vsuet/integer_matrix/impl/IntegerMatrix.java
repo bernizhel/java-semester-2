@@ -17,7 +17,7 @@ public class IntegerMatrix {
         fillingStrategy.generate(matrix);
     }
 
-    public int sumAboveMainDiagonal() {
+    public int getSumAboveMainDiagonal() {
         int result = 0;
         for (int rowIndex = 0; rowIndex < matrix.length; rowIndex++) {
             for (int columnIndex = rowIndex + 1; columnIndex < matrix[rowIndex].length; columnIndex++) {
@@ -28,7 +28,7 @@ public class IntegerMatrix {
         return result;
     }
 
-    public int productOfMainDiagonal() {
+    public int getProductOfMainDiagonal() {
         int result = 1;
         for (int rowIndex = 0; rowIndex < matrix.length && rowIndex < matrix[rowIndex].length; rowIndex++) {
             result *= matrix[rowIndex][rowIndex];
@@ -37,7 +37,7 @@ public class IntegerMatrix {
         return result;
     }
 
-    public int negativeSumBelowMainDiagonal() {
+    public int getNegativeSumBelowMainDiagonal() {
         int result = 0;
         for (int rowIndex = 1; rowIndex < matrix.length; rowIndex++) {
             for (int columnIndex = 0; columnIndex < rowIndex && columnIndex < matrix[rowIndex].length; columnIndex++) {
@@ -51,7 +51,7 @@ public class IntegerMatrix {
 
     @Override
     public String toString() {
-        int longestLength = findLongest().length();
+        int longestLength = getLongestNumber().length();
         StringBuilder matrixRepresentation = new StringBuilder();
 
         for (int[] row : matrix) {
@@ -64,17 +64,20 @@ public class IntegerMatrix {
             matrixRepresentation.append("]\n");
         }
 
+        int lastNewLineIndex = matrixRepresentation.length() - 1;
+        matrixRepresentation.deleteCharAt(lastNewLineIndex);
         return matrixRepresentation.toString();
     }
 
-    private String findLongest() {
-        String longest = "";
+    private String getLongestNumber() {
+        String longestNumber = "";
         for (int[] row : matrix) {
             for (int number : row) {
-                longest = longest.length() > Integer.toString(number).length() ? longest : Integer.toString(number);
+                String numberAsString = Integer.toString(number);
+                longestNumber = longestNumber.length() > numberAsString.length() ? longestNumber : numberAsString;
             }
         }
 
-        return longest;
+        return longestNumber;
     }
 }

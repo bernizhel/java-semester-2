@@ -1,10 +1,6 @@
 package ru.vsuet.matrices.integer_matrix;
 
-import ru.vsuet.matrices.integer_matrix.impl.IntegerMatrix;
-import ru.vsuet.matrices.integer_matrix.impl.ConstantFillingStrategy;
-import ru.vsuet.matrices.integer_matrix.impl.RandomFillingStrategy;
-import ru.vsuet.matrices.integer_matrix.impl.RangeFillingStrategy;
-import ru.vsuet.matrices.integer_matrix.interfaces.FillingStrategy;
+import ru.vsuet.matrices.interfaces.FillingStrategy;
 
 public class Main {
     public static void main(String[] args) {

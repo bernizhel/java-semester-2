@@ -1,6 +1,6 @@
-package ru.vsuet.matrices.integer_matrix.impl;
+package ru.vsuet.matrices.integer_matrix;
 
-import ru.vsuet.matrices.integer_matrix.interfaces.FillingStrategy;
+import ru.vsuet.matrices.interfaces.FillingStrategy;
 
 import java.util.Random;
 

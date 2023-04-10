@@ -1,4 +1,4 @@
-package ru.vsuet.matrices.integer_matrix.interfaces;
+package ru.vsuet.matrices.interfaces;
 
 public interface FillingStrategy {
     void generate(int[][] matrix);

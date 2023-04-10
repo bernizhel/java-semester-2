@@ -1,9 +1,9 @@
-package ru.vsuet.matrices.integer_matrix.impl;
+package ru.vsuet.matrices.integer_matrix;
 
-import ru.vsuet.matrices.integer_matrix.interfaces.FillingStrategy;
-import ru.vsuet.matrices.integer_matrix.interfaces.Matrix;
+import ru.vsuet.matrices.interfaces.FillingStrategy;
+import ru.vsuet.matrices.interfaces.Matrix;
 
-public class IntegerMatrix {
+public class IntegerMatrix implements Matrix<Integer> {
     private final int[][] matrix;
     private final FillingStrategy fillingStrategy;
 
@@ -20,7 +20,7 @@ public class IntegerMatrix {
         fillingStrategy.generate(matrix);
     }
 
-    public int getSumAboveMainDiagonal() {
+    public Integer getSumAboveMainDiagonal() {
         int result = 0;
         for (int rowIndex = 0; rowIndex < matrix.length; rowIndex++) {
             for (int columnIndex = rowIndex + 1; columnIndex < matrix[rowIndex].length; columnIndex++) {
@@ -31,7 +31,7 @@ public class IntegerMatrix {
         return result;
     }
 
-    public int getProductOfMainDiagonal() {
+    public Integer getProductOfMainDiagonal() {
         int result = 1;
         for (int rowIndex = 0; rowIndex < matrix.length && rowIndex < matrix[rowIndex].length; rowIndex++) {
             result *= matrix[rowIndex][rowIndex];
@@ -40,7 +40,7 @@ public class IntegerMatrix {
         return result;
     }
 
-    public int getNegativeSumBelowMainDiagonal() {
+    public Integer getNegativeSumBelowMainDiagonal() {
         int result = 0;
         for (int rowIndex = 1; rowIndex < matrix.length; rowIndex++) {
             for (int columnIndex = 0; columnIndex < rowIndex && columnIndex < matrix[rowIndex].length; columnIndex++) {

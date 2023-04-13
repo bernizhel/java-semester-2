@@ -186,7 +186,7 @@ public class MyLinkedListTest {
         assertEquals(TestConstants.THIRD, myLinkedList.getLast());
         assertEquals(TestConstants.FIRST, myLinkedList.get(0));
         assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        assertEquals(TestConstants.THIRD, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(2));
         assertNull(myLinkedList.get(-1));
         assertNull(myLinkedList.get(3));
     }
@@ -202,7 +202,7 @@ public class MyLinkedListTest {
         assertEquals(TestConstants.THIRD, myLinkedList.getLast());
         assertEquals(TestConstants.FIRST, myLinkedList.get(0));
         assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        assertEquals(TestConstants.THIRD, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(2));
         assertNull(myLinkedList.get(-1));
         assertNull(myLinkedList.get(3));
     }
@@ -221,7 +221,7 @@ public class MyLinkedListTest {
         assertEquals(TestConstants.THIRD_UPDATED, myLinkedList.getLast());
         assertEquals(TestConstants.FIRST_UPDATED, myLinkedList.get(0));
         assertEquals(TestConstants.SECOND_UPDATED, myLinkedList.get(1));
-        assertEquals(TestConstants.THIRD_UPDATED, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD_UPDATED, myLinkedList.get(2));
         assertNull(myLinkedList.get(-1));
         assertNull(myLinkedList.get(3));
     }
@@ -303,7 +303,7 @@ public class MyLinkedListTest {
         assertEquals(TestConstants.THIRD, myLinkedList.getLast());
         assertEquals(TestConstants.FIRST, myLinkedList.get(0));
         assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        assertEquals(TestConstants.THIRD, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(2));
         assertNull(myLinkedList.get(-1));
         assertNull(myLinkedList.get(3));
     }

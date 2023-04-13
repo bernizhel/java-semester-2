@@ -1,15 +1,17 @@
 package ru.vsuet.my_linked_list;
 
+import java.util.Iterator;
+
 /**
  * Danil Kosenko's (bernizhel's) implementation of the linked list.
  *
  * @param <E> which type the elements are in the list
  */
 public class MyLinkedList<E> implements LinkedList<E> {
-    private Node<E> headNode;
+    private MyLinkedListImpl<E> myLinkedListImpl;
 
     public MyLinkedList() {
-        this.headNode = null;
+        this.myLinkedListImpl = new MyLinkedListImpl<>();
     }
 
     /**
@@ -19,16 +21,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return the last element's value or null
      */
     public E getLast() {
-        if (headNode == null) {
-            return null;
-        }
-
-        Node<E> currentNode = headNode;
-        while (currentNode.getNextNode() != null) {
-            currentNode = currentNode.getNextNode();
-        }
-
-        return currentNode.getValue();
+        return myLinkedListImpl.getLast().getValue();
     }
 
     /**
@@ -39,20 +32,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return the element's value or null
      */
     public E get(int index) {
-        Node<E> currentNode = headNode;
-        int currentIndex = 0;
-        while (true) {
-            if (currentNode == null) {
-                return null;
-            }
-
-            if (currentIndex == index) {
-                return currentNode.getValue();
-            }
-
-            currentNode = currentNode.getNextNode();
-            currentIndex++;
-        }
+        return myLinkedListImpl.get(index).getValue();
     }
 
     /**
@@ -61,20 +41,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @param value the new element's value
      */
     public void add(E value) {
-        Node<E> newNode = new Node<>();
-        newNode.setValue(value);
-
-        if (headNode == null) {
-            headNode = newNode;
-            return;
-        }
-
-        Node<E> currentNode = headNode;
-        while (currentNode.getNextNode() != null) {
-            currentNode = currentNode.getNextNode();
-        }
-
-        currentNode.setNextNode(newNode);
+        myLinkedListImpl.add(value);
     }
 
     /**
@@ -86,124 +53,38 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @param value new element's value
      */
     public void add(int index, E value) {
-        Node<E> newNode = new Node<>();
-        newNode.setValue(value);
-
-        if (index == 0) {
-            newNode.setNextNode(headNode);
-            headNode = newNode;
-            return;
-        }
-
-        Node<E> currentNode = headNode;
-        int currentIndex = 1;
-        while (true) {
-            if (currentNode == null) {
-                return;
-            }
-
-            if (currentIndex == index) {
-                newNode.setNextNode(currentNode.getNextNode());
-                currentNode.setNextNode(newNode);
-                return;
-            }
-
-            currentNode = currentNode.getNextNode();
-            currentIndex++;
-        }
+        myLinkedListImpl.add(index, value);
     }
 
     /**
      * Updates an element's value positioned at the {@code index} with the new {@code value}.
      * If the {@code index} is out of bounds or negative, does nothing.
-     * 
+     *
      * @param index which index to search for
      * @param value new value of the element
      */
     public void update(int index, E value) {
-        Node<E> currentNode = headNode;
-        int currentIndex = 0;
-        while (true) {
-            if (currentNode == null) {
-                return;
-            }
-
-            if (currentIndex == index) {
-                currentNode.setValue(value);
-                return;
-            }
-
-            currentNode = currentNode.getNextNode();
-            currentIndex++;
-        }
+        myLinkedListImpl.update(index, value);
     }
 
     /**
      * Removes an element from the list searched by the {@code value}.
      * If there is no element with the {@code value}, does nothing.
-     * 
+     *
      * @param value which value to search for
      */
     public void remove(E value) {
-        if (headNode == null) {
-            return;
-        }
-
-        if (headNode.getValue() == value) {
-            headNode = headNode.getNextNode();
-            return;
-        }
-
-        Node<E> previousNode = headNode;
-        Node<E> currentNode = previousNode.getNextNode();
-        while (true) {
-            if (currentNode == null) {
-                return;
-            }
-
-            if (currentNode.getValue().equals(value)) {
-                previousNode.setNextNode(currentNode.getNextNode());
-                return;
-            }
-
-            previousNode = currentNode;
-            currentNode = currentNode.getNextNode();
-        }
+        myLinkedListImpl.remove(value);
     }
 
     /**
      * Removes an element from the list by the {@code index}.
      * If the {@code index} is out of bounds or negative, does nothing.
-     * 
+     *
      * @param index which index to search for
      */
     public void remove(int index) {
-        if (headNode == null) {
-            return;
-        }
-
-        if (index == 0) {
-            headNode = headNode.getNextNode();
-            return;
-        }
-
-        Node<E> previousNode = headNode;
-        Node<E> currentNode = previousNode.getNextNode();
-        int currentIndex = 1;
-        while (true) {
-            if (currentNode == null) {
-                return;
-            }
-
-            if (currentIndex == index) {
-                previousNode.setNextNode(currentNode.getNextNode());
-                return;
-            }
-
-            previousNode = currentNode;
-            currentNode = currentNode.getNextNode();
-            currentIndex++;
-        }
+        myLinkedListImpl.remove(index);
     }
 
     /**
@@ -212,18 +93,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return integer value of the list's size
      */
     public int size() {
-        if (headNode == null) {
-            return 0;
-        }
-
-        Node<E> currentNode = headNode;
-        int listSize = 1;
-        while (currentNode.getNextNode() != null) {
-            listSize++;
-            currentNode = currentNode.getNextNode();
-        }
-
-        return listSize;
+        return myLinkedListImpl.size();
     }
 
     /**
@@ -232,15 +102,24 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return true or false
      */
     public boolean isEmpty() {
-        return headNode == null;
+        return myLinkedListImpl.isEmpty();
     }
 
     /**
-     * Creates {@code MyLinkedList} instance based on the passed {@code values}.
+     * Returns new iterator for the instance.
+     *
+     * @return {@code Iterator<E>} of the instance
+     */
+    public Iterator<E> iterator() {
+        return myLinkedListImpl.iterator();
+    }
+
+    /**
+     * Creates {@code MyLinkedListImpl} instance based on the passed {@code values}.
      *
      * @param values new list's elements
-     * @return new {@code MyLinkedList} instance
-     * @param <E> new {@code MyLinkedList} instance's type of elements
+     * @return new {@code MyLinkedListImpl} instance
+     * @param <E> new {@code MyLinkedListImpl} instance's type of elements
      */
     @SafeVarargs
     public static <E> MyLinkedList<E> of(E... values) {

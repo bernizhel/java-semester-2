@@ -2,10 +2,10 @@ package ru.vsuet.my_linked_list;
 
 import java.util.Iterator;
 
-public interface LinkedList<E> extends Iterable<E> {
-    E getLast();
+interface LinkedListImpl<E> {
+    Node<E> getLast();
 
-    E get(int index);
+    Node<E> get(int index);
 
     void add(E value);
 
@@ -20,4 +20,6 @@ public interface LinkedList<E> extends Iterable<E> {
     int size();
 
     boolean isEmpty();
+
+    Iterator<E> iterator();
 }

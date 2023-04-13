@@ -10,9 +10,11 @@ import java.util.Optional;
  */
 class MyLinkedListImpl<E> implements LinkedListImpl<E> {
     private Node<E> headNode;
+    private Node<E> tailNode;
 
     public MyLinkedListImpl() {
         this.headNode = null;
+        this.tailNode = null;
     }
 
     /**
@@ -22,16 +24,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
      * @return the last {@code Node<E>} or null
      */
     public Optional<Node<E>> getLast() {
-        if (headNode == null) {
-            return Optional.empty();
-        }
-
-        Node<E> currentNode = headNode;
-        while (currentNode.getNextNode() != null) {
-            currentNode = currentNode.getNextNode();
-        }
-
-        return Optional.of(currentNode);
+        return Optional.ofNullable(tailNode);
     }
 
     /**
@@ -69,15 +62,12 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
 
         if (headNode == null) {
             headNode = newNode;
+            tailNode = headNode;
             return;
         }
 
-        Node<E> currentNode = headNode;
-        while (currentNode.getNextNode() != null) {
-            currentNode = currentNode.getNextNode();
-        }
-
-        currentNode.setNextNode(newNode);
+        tailNode.setNextNode(newNode);
+        tailNode = tailNode.getNextNode();
     }
 
     /**
@@ -95,6 +85,9 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
         if (index == 0) {
             newNode.setNextNode(headNode);
             headNode = newNode;
+            if (tailNode == null) {
+                tailNode = headNode;
+            }
             return;
         }
 
@@ -105,9 +98,13 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
                 return;
             }
 
+            // TODO: does this work correctly?
             if (currentIndex == index) {
                 newNode.setNextNode(currentNode.getNextNode());
                 currentNode.setNextNode(newNode);
+                if (tailNode == currentNode) {
+                    tailNode = newNode;
+                }
                 return;
             }
 
@@ -152,7 +149,11 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
             return;
         }
 
+        // TODO: equals
         if (headNode.getValue() == value) {
+            if (tailNode == headNode) {
+                tailNode = tailNode.getNextNode();
+            }
             headNode = headNode.getNextNode();
             return;
         }
@@ -165,6 +166,9 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
             }
 
             if (currentNode.getValue().equals(value)) {
+                if (tailNode == currentNode) {
+                    tailNode = previousNode;
+                }
                 previousNode.setNextNode(currentNode.getNextNode());
                 return;
             }
@@ -186,6 +190,9 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
         }
 
         if (index == 0) {
+            if (tailNode == headNode) {
+                tailNode = tailNode.getNextNode();
+            }
             headNode = headNode.getNextNode();
             return;
         }
@@ -199,6 +206,9 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
             }
 
             if (currentIndex == index) {
+                if (tailNode == currentNode) {
+                    tailNode = previousNode;
+                }
                 previousNode.setNextNode(currentNode.getNextNode());
                 return;
             }

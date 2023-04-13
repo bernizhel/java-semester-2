@@ -8,7 +8,6 @@ import java.util.Iterator;
  * @param <E> which type the elements are in the list
  */
 public class MyLinkedList<E> implements LinkedList<E> {
-    // TODO: use tail node
     private final MyLinkedListImpl<E> myLinkedListImpl;
 
     public MyLinkedList() {

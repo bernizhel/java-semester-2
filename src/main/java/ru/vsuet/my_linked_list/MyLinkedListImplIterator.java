@@ -1,6 +1,7 @@
 package ru.vsuet.my_linked_list;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 class MyLinkedListImplIterator<E> implements Iterator<E> {
     private Node<E> currentNode;
@@ -14,8 +15,14 @@ class MyLinkedListImplIterator<E> implements Iterator<E> {
     }
 
     public E next() {
-        E value = currentNode.getValue();
-        currentNode = currentNode.getNextNode();
+        E value;
+        try {
+            value = currentNode.getValue();
+            currentNode = currentNode.getNextNode();
+        } catch (Exception exception) {
+            throw new NoSuchElementException();
+        }
+
         return value;
     }
 }

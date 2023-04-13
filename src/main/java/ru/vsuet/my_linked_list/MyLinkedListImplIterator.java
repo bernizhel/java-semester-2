@@ -6,7 +6,7 @@ class MyLinkedListImplIterator<E> implements Iterator<E> {
     private Node<E> currentNode;
 
     public MyLinkedListImplIterator(MyLinkedListImpl<E> myLinkedListImpl) {
-        this.currentNode = myLinkedListImpl.get(0);
+        this.currentNode = myLinkedListImpl.get(0).orElse(null);
     }
 
     public boolean hasNext() {

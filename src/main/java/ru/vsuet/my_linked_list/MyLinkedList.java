@@ -8,7 +8,8 @@ import java.util.Iterator;
  * @param <E> which type the elements are in the list
  */
 public class MyLinkedList<E> implements LinkedList<E> {
-    private MyLinkedListImpl<E> myLinkedListImpl;
+    // TODO: use tail node
+    private final MyLinkedListImpl<E> myLinkedListImpl;
 
     public MyLinkedList() {
         this.myLinkedListImpl = new MyLinkedListImpl<>();
@@ -21,7 +22,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return the last element's value or null
      */
     public E getLast() {
-        return myLinkedListImpl.getLast().getValue();
+        return myLinkedListImpl.getLast().orElse(new Node<>()).getValue();
     }
 
     /**
@@ -32,7 +33,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return the element's value or null
      */
     public E get(int index) {
-        return myLinkedListImpl.get(index).getValue();
+        return myLinkedListImpl.get(index).orElse(new Node<>()).getValue();
     }
 
     /**

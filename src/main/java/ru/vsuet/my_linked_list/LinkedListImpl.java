@@ -1,11 +1,12 @@
 package ru.vsuet.my_linked_list;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 interface LinkedListImpl<E> {
-    Node<E> getLast();
+    Optional<Node<E>> getLast();
 
-    Node<E> get(int index);
+    Optional<Node<E>> get(int index);
 
     void add(E value);
 

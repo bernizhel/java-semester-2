@@ -1,6 +1,7 @@
 package ru.vsuet.my_linked_list;
 
 import java.util.Iterator;
+import java.util.Optional;
 
 /**
  * Danil Kosenko's (bernizhel's) implementation of the linked list.
@@ -20,9 +21,9 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
      *
      * @return the last {@code Node<E>} or null
      */
-    public Node<E> getLast() {
+    public Optional<Node<E>> getLast() {
         if (headNode == null) {
-            return null;
+            return Optional.empty();
         }
 
         Node<E> currentNode = headNode;
@@ -30,7 +31,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
             currentNode = currentNode.getNextNode();
         }
 
-        return currentNode;
+        return Optional.of(currentNode);
     }
 
     /**
@@ -40,16 +41,16 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
      * @param index which index to search for
      * @return the {@code Node<E>} or null
      */
-    public Node<E> get(int index) {
+    public Optional<Node<E>> get(int index) {
         Node<E> currentNode = headNode;
         int currentIndex = 0;
         while (true) {
             if (currentNode == null) {
-                return null;
+                return Optional.empty();
             }
 
             if (currentIndex == index) {
-                return currentNode;
+                return Optional.of(currentNode);
             }
 
             currentNode = currentNode.getNextNode();

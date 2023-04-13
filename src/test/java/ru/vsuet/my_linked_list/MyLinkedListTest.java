@@ -2,6 +2,9 @@ package ru.vsuet.my_linked_list;
 
 import org.junit.jupiter.api.*;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -318,5 +321,33 @@ public class MyLinkedListTest {
         assertNull(myLinkedList.get(0));
         assertNull(myLinkedList.get(-1));
         assertNull(myLinkedList.get(1));
+    }
+
+    @Test
+    public void loopThrough_whenEmpty_ShouldBeOk() {
+        Iterator<String> iterator = myLinkedList.iterator();
+
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+
+    @Test
+    public void loopThrough_whenWithThree_ShouldBeOk() {
+        myLinkedList = MyLinkedList.of(
+                TestConstants.FIRST,
+                TestConstants.SECOND,
+                TestConstants.THIRD
+        );
+        Iterator<String> iterator = myLinkedList.iterator();
+
+        assertTrue(iterator.hasNext());
+        assertEquals(TestConstants.FIRST, iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals(TestConstants.SECOND, iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals(TestConstants.THIRD, iterator.next());
+        assertFalse(iterator.hasNext());
+        assertThrows(NoSuchElementException.class, iterator::next);
     }
 }

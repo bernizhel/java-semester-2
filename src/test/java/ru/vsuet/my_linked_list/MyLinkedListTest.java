@@ -2,1154 +2,321 @@ package ru.vsuet.my_linked_list;
 
 import org.junit.jupiter.api.*;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MyLinkedListTest {
-    @DisplayName("Empty list")
-    static class EmptyListTestCase {
-        private MyLinkedList<String> myLinkedList;
+    private MyLinkedList<String> myLinkedList;
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-        }
-
-        @Test
-        public void isEmpty_True() {
-            assertTrue(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Zero() {
-            assertEquals(0, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_Null() {
-            assertNull(myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_Null() {
-            assertNull(myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+    @BeforeEach
+    public void setUp() {
+        myLinkedList = new MyLinkedList<>();
     }
 
-    @DisplayName("Add one element")
-    static class AddOneElementTestCase {
-        private MyLinkedList<String> myLinkedList;
-
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(TestConstants.FIRST);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_One() {
-            assertEquals(1, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+    @Test
+    public void getState_whenEmpty_ShouldBeOk() {
+        assertTrue(myLinkedList.isEmpty());
+        assertEquals(0, myLinkedList.size());
+        assertNull(myLinkedList.getLast());
+        assertNull(myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Add one element at zero index")
-    static class AddOneElementAtZeroIndexTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddOne_ShouldBeOk() {
+        myLinkedList.add(TestConstants.FIRST);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_One() {
-            assertEquals(1, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(1, myLinkedList.size());
+        assertEquals(TestConstants.FIRST, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Add one element at out of bounds index")
-    static class AddOneElementAtOutOfBoundsIndexTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddOneAtZero_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(1, TestConstants.FIRST);
-        }
-
-        @Test
-        public void isEmpty_True() {
-            assertTrue(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Zero() {
-            assertEquals(0, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_Null() {
-            assertNull(myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_Null() {
-            assertNull(myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(1, myLinkedList.size());
+        assertEquals(TestConstants.FIRST, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Update non-existent element")
-    static class UpdateNonExistentElementTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddOneAtOutOfBounds_ShouldBeOk() {
+        myLinkedList.add(1, TestConstants.FIRST);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.update(0, TestConstants.FIRST_UPDATED);
-        }
-
-        @Test
-        public void isEmpty_True() {
-            assertTrue(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Zero() {
-            assertEquals(0, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_Null() {
-            assertNull(myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_Null() {
-            assertNull(myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertTrue(myLinkedList.isEmpty());
+        assertEquals(0, myLinkedList.size());
+        assertNull(myLinkedList.getLast());
+        assertNull(myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Update one element")
-    static class UpdateOneElementTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenUpdatedNonExistent_ShouldBeOk() {
+        myLinkedList.update(0, TestConstants.FIRST_UPDATED);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.update(0, TestConstants.FIRST_UPDATED);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_One() {
-            assertEquals(1, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_FIRST_UPDATED() {
-            assertEquals(TestConstants.FIRST_UPDATED, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST_UPDATED() {
-            assertEquals(TestConstants.FIRST_UPDATED, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertTrue(myLinkedList.isEmpty());
+        assertEquals(0, myLinkedList.size());
+        assertNull(myLinkedList.getLast());
+        assertNull(myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Remove non-existent element")
-    static class RemoveNonExistentElementTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddAndUpdateOne_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.update(0, TestConstants.FIRST_UPDATED);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.remove(TestConstants.FIRST);
-        }
-
-        @Test
-        public void isEmpty_True() {
-            assertTrue(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Zero() {
-            assertEquals(0, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_Null() {
-            assertNull(myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_Null() {
-            assertNull(myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(1, myLinkedList.size());
+        assertEquals(TestConstants.FIRST_UPDATED, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST_UPDATED, myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Remove non-existent element by index")
-    static class RemoveNonExistentElementByIndexTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenRemoveNonExistent_ShouldBeOk() {
+        myLinkedList.remove(TestConstants.FIRST);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.remove(0);
-        }
-
-        @Test
-        public void isEmpty_True() {
-            assertTrue(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Zero() {
-            assertEquals(0, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_Null() {
-            assertNull(myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_Null() {
-            assertNull(myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertTrue(myLinkedList.isEmpty());
+        assertEquals(0, myLinkedList.size());
+        assertNull(myLinkedList.getLast());
+        assertNull(myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Remove one element")
-    static class RemoveOneElementTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenRemoveByIndexNonExistent_ShouldBeOk() {
+        myLinkedList.remove(0);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.remove(TestConstants.FIRST);
-        }
-
-        @Test
-        public void isEmpty_True() {
-            assertTrue(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Zero() {
-            assertEquals(0, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_Null() {
-            assertNull(myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_Null() {
-            assertNull(myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertTrue(myLinkedList.isEmpty());
+        assertEquals(0, myLinkedList.size());
+        assertNull(myLinkedList.getLast());
+        assertNull(myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Remove by index one element")
-    static class RemoveByIndexOneElementTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddAndRemoveOne_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.remove(TestConstants.FIRST);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.remove(0);
-        }
-
-        @Test
-        public void isEmpty_True() {
-            assertTrue(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Zero() {
-            assertEquals(0, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_Null() {
-            assertNull(myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_Null() {
-            assertNull(myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertTrue(myLinkedList.isEmpty());
+        assertEquals(0, myLinkedList.size());
+        assertNull(myLinkedList.getLast());
+        assertNull(myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Add two elements")
-    static class AddTwoElementsTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddAndRemoveByIndexOne_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.remove(0);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(TestConstants.FIRST);
-            myLinkedList.add(TestConstants.SECOND);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Two() {
-            assertEquals(2, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(2));
-        }
+        assertTrue(myLinkedList.isEmpty());
+        assertEquals(0, myLinkedList.size());
+        assertNull(myLinkedList.getLast());
+        assertNull(myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Add two elements by indices")
-    static class AddTwoElementsByIndicesTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddTwo_ShouldBeOk() {
+        myLinkedList.add(TestConstants.FIRST);
+        myLinkedList.add(TestConstants.SECOND);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.add(1, TestConstants.SECOND);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Two() {
-            assertEquals(2, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(2));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(2, myLinkedList.size());
+        assertEquals(TestConstants.SECOND, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(2));
     }
 
-    @DisplayName("Add elements out of bounds")
-    static class AddElementsOutOfBindsTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddByIndexTwo_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.add(1, TestConstants.SECOND);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(1, TestConstants.FIRST);
-            myLinkedList.add(-1, TestConstants.SECOND);
-        }
-
-        @Test
-        public void isEmpty_True() {
-            assertTrue(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Zero() {
-            assertEquals(0, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_Null() {
-            assertNull(myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_Null() {
-            assertNull(myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(2, myLinkedList.size());
+        assertEquals(TestConstants.SECOND, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(2));
     }
 
-    @DisplayName("Add three elements")
-    static class AddThreeElementsTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddTwoOutOfBounds_ShouldBeOk() {
+        myLinkedList.add(1, TestConstants.FIRST);
+        myLinkedList.add(-1, TestConstants.SECOND);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(TestConstants.FIRST);
-            myLinkedList.add(TestConstants.SECOND);
-            myLinkedList.add(TestConstants.THIRD);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Three() {
-            assertEquals(3, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getTwo_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.get(2));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(3));
-        }
+        assertTrue(myLinkedList.isEmpty());
+        assertEquals(0, myLinkedList.size());
+        assertNull(myLinkedList.getLast());
+        assertNull(myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 
-    @DisplayName("Add three elements by indices")
-    static class AddThreeElementsByIndicesTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddThree_ShouldBeOk() {
+        myLinkedList.add(TestConstants.FIRST);
+        myLinkedList.add(TestConstants.SECOND);
+        myLinkedList.add(TestConstants.THIRD);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.add(1, TestConstants.SECOND);
-            myLinkedList.add(2, TestConstants.THIRD);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Three() {
-            assertEquals(3, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getTwo_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.get(2));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(3));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(3, myLinkedList.size());
+        assertEquals(TestConstants.THIRD, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(3));
     }
 
-    @DisplayName("Update elements out of three")
-    static class UpdateElementsOutOfThreeTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddByIndexThree_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.add(1, TestConstants.SECOND);
+        myLinkedList.add(2, TestConstants.THIRD);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.add(1, TestConstants.SECOND);
-            myLinkedList.add(2, TestConstants.THIRD);
-
-            myLinkedList.update(0, TestConstants.FIRST_UPDATED);
-            myLinkedList.update(1, TestConstants.SECOND_UPDATED);
-            myLinkedList.update(2, TestConstants.THIRD_UPDATED);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Three() {
-            assertEquals(3, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_THIRD_UPDATED() {
-            assertEquals(TestConstants.THIRD_UPDATED, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST_UPDATED() {
-            assertEquals(TestConstants.FIRST_UPDATED, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_SECOND_UPDATED() {
-            assertEquals(TestConstants.SECOND_UPDATED, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getTwo_THIRD_UPDATED() {
-            assertEquals(TestConstants.THIRD_UPDATED, myLinkedList.get(2));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(3));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(3, myLinkedList.size());
+        assertEquals(TestConstants.THIRD, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(3));
     }
 
-    @DisplayName("Remove second element out of three")
-    static class RemoveSecondElementOutOfThreeTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddAndUpdateThree_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.add(1, TestConstants.SECOND);
+        myLinkedList.add(2, TestConstants.THIRD);
+        myLinkedList.update(0, TestConstants.FIRST_UPDATED);
+        myLinkedList.update(1, TestConstants.SECOND_UPDATED);
+        myLinkedList.update(2, TestConstants.THIRD_UPDATED);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.add(1, TestConstants.SECOND);
-            myLinkedList.add(2, TestConstants.THIRD);
-
-            myLinkedList.remove(TestConstants.SECOND);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Two() {
-            assertEquals(2, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getTwo_Null() {
-            assertNull(myLinkedList.get(2));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(3));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(3, myLinkedList.size());
+        assertEquals(TestConstants.THIRD_UPDATED, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST_UPDATED, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND_UPDATED, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD_UPDATED, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(3));
     }
 
-    @DisplayName("Remove second element out of three by index")
-    static class RemoveSecondElementOutOfThreeByIndexTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddThreeRemoveSecond_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.add(1, TestConstants.SECOND);
+        myLinkedList.add(2, TestConstants.THIRD);
+        myLinkedList.remove(TestConstants.SECOND);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.add(1, TestConstants.SECOND);
-            myLinkedList.add(2, TestConstants.THIRD);
-
-            myLinkedList.remove(1);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Two() {
-            assertEquals(2, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getTwo_Null() {
-            assertNull(myLinkedList.get(2));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(3));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(2, myLinkedList.size());
+        assertEquals(TestConstants.THIRD, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(2));
     }
 
-    @DisplayName("Remove last element out of three")
-    static class RemoveLastElementOutOfThreeTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddThreeRemoveByIndexSecond_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.add(1, TestConstants.SECOND);
+        myLinkedList.add(2, TestConstants.THIRD);
+        myLinkedList.remove(1);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.add(1, TestConstants.SECOND);
-            myLinkedList.add(2, TestConstants.THIRD);
-
-            myLinkedList.remove(TestConstants.THIRD);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Two() {
-            assertEquals(2, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getTwo_Null() {
-            assertNull(myLinkedList.get(2));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(3));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(2, myLinkedList.size());
+        assertEquals(TestConstants.THIRD, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(2));
     }
 
-    @DisplayName("Remove last element out of three by index")
-    static class RemoveLastElementOutOfThreeByIndexTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddThreeRemoveThird_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.add(1, TestConstants.SECOND);
+        myLinkedList.add(2, TestConstants.THIRD);
+        myLinkedList.remove(TestConstants.THIRD);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = new MyLinkedList<>();
-            myLinkedList.add(0, TestConstants.FIRST);
-            myLinkedList.add(1, TestConstants.SECOND);
-            myLinkedList.add(2, TestConstants.THIRD);
-
-            myLinkedList.remove(2);
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Two() {
-            assertEquals(2, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getTwo_Null() {
-            assertNull(myLinkedList.get(2));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(3));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(2, myLinkedList.size());
+        assertEquals(TestConstants.SECOND, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(2));
     }
 
-    @DisplayName("Create list of three elements")
-    static class CreateListOfThreeElementsTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void getState_whenAddThreeRemoveByIndexThird_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.add(1, TestConstants.SECOND);
+        myLinkedList.add(2, TestConstants.THIRD);
+        myLinkedList.remove(2);
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = MyLinkedList.of(
-                    TestConstants.FIRST,
-                    TestConstants.SECOND,
-                    TestConstants.THIRD
-            );
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Three() {
-            assertEquals(3, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST() {
-            assertEquals(TestConstants.FIRST, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_SECOND() {
-            assertEquals(TestConstants.SECOND, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getTwo_THIRD() {
-            assertEquals(TestConstants.THIRD, myLinkedList.get(2));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(3));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(2, myLinkedList.size());
+        assertEquals(TestConstants.SECOND, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(2));
     }
 
-    @DisplayName("Create list of no elements")
-    static class CreateListOfNoElementsTestCase {
-        private MyLinkedList<String> myLinkedList;
+    @Test
+    public void createList_whenGiveThree_ShouldBeOk() {
+        myLinkedList = MyLinkedList.of(
+                TestConstants.FIRST,
+                TestConstants.SECOND,
+                TestConstants.THIRD
+        );
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = MyLinkedList.of();
-        }
-
-        @Test
-        public void isEmpty_True() {
-            assertTrue(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Zero() {
-            assertEquals(0, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_Null() {
-            assertNull(myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_Null() {
-            assertNull(myLinkedList.get(0));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(1));
-        }
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(3, myLinkedList.size());
+        assertEquals(TestConstants.THIRD, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(3));
     }
 
-    @DisplayName("Deep object")
-    static class DeepObjectTestCase {
-        private MyLinkedList<List<String>> myLinkedList;
+    @Test
+    public void createList_whenGiveNothing_ShouldBeOk() {
+        myLinkedList = MyLinkedList.of();
 
-        @BeforeEach
-        public void setUp() {
-            myLinkedList = MyLinkedList.of(
-                    TestConstants.FIRST_DEEP_OBJECT,
-                    TestConstants.SECOND_DEEP_OBJECT,
-                    TestConstants.THIRD_DEEP_OBJECT
-            );
-        }
-
-        @Test
-        public void isEmpty_False() {
-            assertFalse(myLinkedList.isEmpty());
-        }
-
-        @Test
-        public void size_Three() {
-            assertEquals(3, myLinkedList.size());
-        }
-
-        @Test
-        public void getLast_THIRD_DEEP_OBJECT() {
-            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.getLast());
-        }
-
-        @Test
-        public void getZero_FIRST_DEEP_OBJECT() {
-            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
-        }
-
-        @Test
-        public void getOne_SECOND_DEEP_OBJECT() {
-            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(1));
-        }
-
-        @Test
-        public void getTwo_THIRD_DEEP_OBJECT() {
-            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(2));
-        }
-
-        @Test
-        public void getNegative_Null() {
-            assertNull(myLinkedList.get(-1));
-        }
-
-        @Test
-        public void getOutOfBounds_Null() {
-            assertNull(myLinkedList.get(3));
-        }
-
-        @Test
-        public void updateZeroAndGetIt_FIRST_DEEP_OBJECT_UPDATED() {
-            myLinkedList.update(0, TestConstants.FIRST_DEEP_OBJECT_UPDATED);
-            assertEquals(TestConstants.FIRST_DEEP_OBJECT_UPDATED, myLinkedList.get(0));
-        }
-
-        @Test
-        public void updateOneAndGetIt_SECOND_DEEP_OBJECT_UPDATED() {
-            myLinkedList.update(1, TestConstants.SECOND_DEEP_OBJECT_UPDATED);
-            assertEquals(TestConstants.SECOND_DEEP_OBJECT_UPDATED, myLinkedList.get(1));
-        }
-
-        @Test
-        public void updateTwoAndGetIt_THIRD_DEEP_OBJECT_UPDATED() {
-            myLinkedList.update(2, TestConstants.THIRD_DEEP_OBJECT_UPDATED);
-            assertEquals(TestConstants.THIRD_DEEP_OBJECT_UPDATED, myLinkedList.get(2));
-        }
-
-        @Test
-        public void removeOne_BeDeleted() {
-            myLinkedList.remove(TestConstants.FIRST_DEEP_OBJECT);
-            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(0));
-            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(1));
-            assertNull(myLinkedList.get(2));
-        }
-
-        @Test
-        public void removeTwo_BeDeleted() {
-            myLinkedList.remove(TestConstants.SECOND_DEEP_OBJECT);
-            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
-            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(1));
-            assertNull(myLinkedList.get(2));
-        }
-
-        @Test
-        public void removeThree_BeDeleted() {
-            myLinkedList.remove(TestConstants.THIRD_DEEP_OBJECT);
-            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
-            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(1));
-            assertNull(myLinkedList.get(2));
-        }
-
-        @Test
-        public void removeOneByIndex_BeDeleted() {
-            myLinkedList.remove(0);
-            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(0));
-            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(1));
-            assertNull(myLinkedList.get(2));
-        }
-
-        @Test
-        public void removeTwoByIndex_BeDeleted() {
-            myLinkedList.remove(1);
-            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
-            assertEquals(TestConstants.THIRD_DEEP_OBJECT, myLinkedList.get(1));
-            assertNull(myLinkedList.get(2));
-        }
-
-        @Test
-        public void removeThreeByIndex_BeDeleted() {
-            myLinkedList.remove(2);
-            assertEquals(TestConstants.FIRST_DEEP_OBJECT, myLinkedList.get(0));
-            assertEquals(TestConstants.SECOND_DEEP_OBJECT, myLinkedList.get(1));
-            assertNull(myLinkedList.get(2));
-        }
+        assertTrue(myLinkedList.isEmpty());
+        assertEquals(0, myLinkedList.size());
+        assertNull(myLinkedList.getLast());
+        assertNull(myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
     }
 }

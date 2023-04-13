@@ -5,7 +5,7 @@ package ru.vsuet.my_linked_list;
  *
  * @param <E> which type the elements are in the list
  */
-public class MyLinkedList<E> {
+public class MyLinkedList<E> implements LinkedList<E> {
     private Node<E> headNode;
 
     public MyLinkedList() {

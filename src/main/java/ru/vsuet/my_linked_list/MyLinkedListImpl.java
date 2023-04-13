@@ -11,10 +11,12 @@ import java.util.Optional;
 class MyLinkedListImpl<E> implements LinkedListImpl<E> {
     private Node<E> headNode;
     private Node<E> tailNode;
+    private int tailIndex;
 
     public MyLinkedListImpl() {
         this.headNode = null;
         this.tailNode = null;
+        this.tailIndex = 0;
     }
 
     /**
@@ -35,6 +37,10 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
      * @return the {@code Node<E>} or null
      */
     public Optional<Node<E>> get(int index) {
+        if (tailIndex == index) {
+            return Optional.ofNullable(tailNode);
+        }
+
         Node<E> currentNode = headNode;
         int currentIndex = 0;
         while (true) {
@@ -68,6 +74,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
 
         tailNode.setNextNode(newNode);
         tailNode = tailNode.getNextNode();
+        tailIndex++;
     }
 
     /**
@@ -87,7 +94,17 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
             headNode = newNode;
             if (tailNode == null) {
                 tailNode = headNode;
+            } else {
+                tailIndex++;
             }
+            return;
+        }
+
+        if (tailIndex == index) {
+            newNode.setNextNode(tailNode.getNextNode());
+            tailNode.setNextNode(newNode);
+            tailNode = newNode;
+            tailIndex++;
             return;
         }
 
@@ -105,6 +122,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
                 if (tailNode == currentNode) {
                     tailNode = newNode;
                 }
+                tailIndex++;
                 return;
             }
 
@@ -121,6 +139,11 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
      * @param value new value of the element
      */
     public void update(int index, E value) {
+        if (tailIndex == index && tailNode != null) {
+            tailNode.setValue(value);
+            return;
+        }
+
         Node<E> currentNode = headNode;
         int currentIndex = 0;
         while (true) {
@@ -153,6 +176,8 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
         if (headNode.getValue() == value) {
             if (tailNode == headNode) {
                 tailNode = tailNode.getNextNode();
+            } else {
+                tailIndex--;
             }
             headNode = headNode.getNextNode();
             return;
@@ -170,6 +195,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
                     tailNode = previousNode;
                 }
                 previousNode.setNextNode(currentNode.getNextNode());
+                tailIndex--;
                 return;
             }
 
@@ -192,6 +218,8 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
         if (index == 0) {
             if (tailNode == headNode) {
                 tailNode = tailNode.getNextNode();
+            } else {
+                tailIndex--;
             }
             headNode = headNode.getNextNode();
             return;
@@ -210,6 +238,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
                     tailNode = previousNode;
                 }
                 previousNode.setNextNode(currentNode.getNextNode());
+                tailIndex--;
                 return;
             }
 
@@ -220,23 +249,16 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
     }
 
     /**
-     * Returns size of the list.
+     * Returns tailIndex of the list.
      *
-     * @return integer value of the list's size
+     * @return integer value of the list's tailIndex
      */
     public int size() {
         if (headNode == null) {
             return 0;
         }
 
-        Node<E> currentNode = headNode;
-        int listSize = 1;
-        while (currentNode.getNextNode() != null) {
-            listSize++;
-            currentNode = currentNode.getNextNode();
-        }
-
-        return listSize;
+        return tailIndex + 1;
     }
 
     /**

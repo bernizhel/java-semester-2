@@ -8,7 +8,7 @@ import java.util.Optional;
  *
  * @param <E> which type the elements are in the list
  */
-class SinglyLinkedListImpl<E> {
+class SinglyLinkedListImpl<E> implements Iterable<E> {
     private SinglyLinkedNode<E> headSinglyLinkedNode;
     private SinglyLinkedNode<E> tailSinglyLinkedNode;
     private int tailIndex;

@@ -23,7 +23,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
      * Returns the very last of the list element's value.
      * If there is no elements, returns null.
      *
-     * @return the last {@code Node<E>} or null
+     * @return {@code Optional<Node<E>>} of nullable
      */
     public Optional<Node<E>> getLast() {
         return Optional.ofNullable(tailNode);
@@ -34,7 +34,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
      * If the {@code index} is out of bounds or negative, returns null.
      *
      * @param index which index to search for
-     * @return the {@code Node<E>} or null
+     * @return {@code Optional<Node<E>>} of nullable
      */
     public Optional<Node<E>> get(int index) {
         if (tailIndex == index) {
@@ -115,7 +115,6 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
                 return;
             }
 
-            // TODO: does this work correctly?
             if (currentIndex == index) {
                 newNode.setNextNode(currentNode.getNextNode());
                 currentNode.setNextNode(newNode);
@@ -172,7 +171,6 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
             return;
         }
 
-        // TODO: equals
         if (headNode.getValue() == value) {
             if (tailNode == headNode) {
                 tailNode = tailNode.getNextNode();

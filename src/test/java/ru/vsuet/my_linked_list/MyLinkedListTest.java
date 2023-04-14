@@ -137,6 +137,35 @@ public class MyLinkedListTest {
         assertNull(myLinkedList.get(1));
     }
 
+
+    @Test
+    public void getState_whenAddTwoAndRemoveFirst_ShouldBeOk() {
+        myLinkedList.add(TestConstants.FIRST);
+        myLinkedList.add(TestConstants.SECOND);
+        myLinkedList.remove(TestConstants.FIRST);
+
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(1, myLinkedList.size());
+        assertEquals(TestConstants.SECOND, myLinkedList.getLast());
+        assertEquals(TestConstants.SECOND, myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
+    }
+
+    @Test
+    public void getState_whenAddTwoAndRemoveByIndexFirst_ShouldBeOk() {
+        myLinkedList.add(TestConstants.FIRST);
+        myLinkedList.add(TestConstants.SECOND);
+        myLinkedList.remove(0);
+
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(1, myLinkedList.size());
+        assertEquals(TestConstants.SECOND, myLinkedList.getLast());
+        assertEquals(TestConstants.SECOND, myLinkedList.get(0));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(1));
+    }
+
     @Test
     public void getState_whenAddTwo_ShouldBeOk() {
         myLinkedList.add(TestConstants.FIRST);
@@ -155,6 +184,20 @@ public class MyLinkedListTest {
     public void getState_whenAddByIndexTwo_ShouldBeOk() {
         myLinkedList.add(0, TestConstants.FIRST);
         myLinkedList.add(1, TestConstants.SECOND);
+
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(2, myLinkedList.size());
+        assertEquals(TestConstants.SECOND, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(2));
+    }
+
+    @Test
+    public void getState_whenAddTwoAtZeroSequentially_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.SECOND);
+        myLinkedList.add(0, TestConstants.FIRST);
 
         assertFalse(myLinkedList.isEmpty());
         assertEquals(2, myLinkedList.size());
@@ -312,6 +355,42 @@ public class MyLinkedListTest {
     }
 
     @Test
+    public void getState_whenAddThreeAndAddOneAsSecond_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.add(1, TestConstants.THIRD);
+        myLinkedList.add(2, TestConstants.FOURTH);
+        myLinkedList.add(1, TestConstants.SECOND);
+
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(4, myLinkedList.size());
+        assertEquals(TestConstants.FOURTH, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(2));
+        assertEquals(TestConstants.FOURTH, myLinkedList.get(3));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(4));
+    }
+
+    @Test
+    public void getState_whenAddThreeAndAddOneAsThird_ShouldBeOk() {
+        myLinkedList.add(0, TestConstants.FIRST);
+        myLinkedList.add(1, TestConstants.SECOND);
+        myLinkedList.add(2, TestConstants.FOURTH);
+        myLinkedList.add(2, TestConstants.THIRD);
+
+        assertFalse(myLinkedList.isEmpty());
+        assertEquals(4, myLinkedList.size());
+        assertEquals(TestConstants.FOURTH, myLinkedList.getLast());
+        assertEquals(TestConstants.FIRST, myLinkedList.get(0));
+        assertEquals(TestConstants.SECOND, myLinkedList.get(1));
+        assertEquals(TestConstants.THIRD, myLinkedList.get(2));
+        assertEquals(TestConstants.FOURTH, myLinkedList.get(3));
+        assertNull(myLinkedList.get(-1));
+        assertNull(myLinkedList.get(4));
+    }
+
+    @Test
     public void createList_whenGiveNothing_ShouldBeOk() {
         myLinkedList = MyLinkedList.of();
 
@@ -330,7 +409,6 @@ public class MyLinkedListTest {
         assertFalse(iterator.hasNext());
         assertThrows(NoSuchElementException.class, iterator::next);
     }
-
 
     @Test
     public void loopThrough_whenWithThree_ShouldBeOk() {

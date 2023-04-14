@@ -1,4 +1,6 @@
-package ru.vsuet.my_linked_list;
+package ru.vsuet.my_linked_list.singly_linked;
+
+import ru.vsuet.my_linked_list.LinkedList;
 
 import java.util.Iterator;
 
@@ -7,11 +9,11 @@ import java.util.Iterator;
  *
  * @param <E> which type the elements are in the list
  */
-public class MyLinkedList<E> implements LinkedList<E> {
-    private final MyLinkedListImpl<E> myLinkedListImpl;
+public class SinglyLinkedList<E> implements LinkedList<E> {
+    private final SinglyLinkedListImpl<E> singlyLinkedListImpl;
 
-    public MyLinkedList() {
-        this.myLinkedListImpl = new MyLinkedListImpl<>();
+    public SinglyLinkedList() {
+        this.singlyLinkedListImpl = new SinglyLinkedListImpl<>();
     }
 
     /**
@@ -21,7 +23,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return the last element's value or null
      */
     public E getLast() {
-        return myLinkedListImpl.getLast().orElse(new Node<>()).getValue();
+        return singlyLinkedListImpl.getLast().orElse(new SinglyLinkedNode<>()).getValue();
     }
 
     /**
@@ -32,7 +34,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return the element's value or null
      */
     public E get(int index) {
-        return myLinkedListImpl.get(index).orElse(new Node<>()).getValue();
+        return singlyLinkedListImpl.get(index).orElse(new SinglyLinkedNode<>()).getValue();
     }
 
     /**
@@ -41,7 +43,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @param value the new element's value
      */
     public void add(E value) {
-        myLinkedListImpl.add(value);
+        singlyLinkedListImpl.add(value);
     }
 
     /**
@@ -53,7 +55,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @param value new element's value
      */
     public void add(int index, E value) {
-        myLinkedListImpl.add(index, value);
+        singlyLinkedListImpl.add(index, value);
     }
 
     /**
@@ -64,7 +66,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @param value new value of the element
      */
     public void update(int index, E value) {
-        myLinkedListImpl.update(index, value);
+        singlyLinkedListImpl.update(index, value);
     }
 
     /**
@@ -74,7 +76,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @param value which value to search for
      */
     public void remove(E value) {
-        myLinkedListImpl.remove(value);
+        singlyLinkedListImpl.remove(value);
     }
 
     /**
@@ -84,7 +86,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @param index which index to search for
      */
     public void remove(int index) {
-        myLinkedListImpl.remove(index);
+        singlyLinkedListImpl.remove(index);
     }
 
     /**
@@ -93,7 +95,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return integer value of the list's size
      */
     public int size() {
-        return myLinkedListImpl.size();
+        return singlyLinkedListImpl.size();
     }
 
     /**
@@ -102,7 +104,7 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return true or false
      */
     public boolean isEmpty() {
-        return myLinkedListImpl.isEmpty();
+        return singlyLinkedListImpl.isEmpty();
     }
 
     /**
@@ -111,23 +113,23 @@ public class MyLinkedList<E> implements LinkedList<E> {
      * @return {@code Iterator<E>} of the instance
      */
     public Iterator<E> iterator() {
-        return myLinkedListImpl.iterator();
+        return singlyLinkedListImpl.iterator();
     }
 
     /**
-     * Creates {@code MyLinkedListImpl} instance based on the passed {@code values}.
+     * Creates {@code SinglyLinkedListImpl} instance based on the passed {@code values}.
      *
      * @param values new list's elements
-     * @return new {@code MyLinkedListImpl} instance
-     * @param <E> new {@code MyLinkedListImpl} instance's type of elements
+     * @return new {@code SinglyLinkedListImpl} instance
+     * @param <E> new {@code SinglyLinkedListImpl} instance's type of elements
      */
     @SafeVarargs
-    public static <E> MyLinkedList<E> of(E... values) {
-        MyLinkedList<E> myLinkedList = new MyLinkedList<>();
+    public static <E> SinglyLinkedList<E> of(E... values) {
+        SinglyLinkedList<E> singlyLinkedList = new SinglyLinkedList<>();
         for (E value : values) {
-            myLinkedList.add(value);
+            singlyLinkedList.add(value);
         }
 
-        return myLinkedList;
+        return singlyLinkedList;
     }
 }

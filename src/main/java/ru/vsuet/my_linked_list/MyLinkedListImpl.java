@@ -100,7 +100,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
             return;
         }
 
-        if (tailIndex == index) {
+        if (size() == index) {
             newNode.setNextNode(tailNode.getNextNode());
             tailNode.setNextNode(newNode);
             tailNode = newNode;
@@ -118,9 +118,6 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
             if (currentIndex == index) {
                 newNode.setNextNode(currentNode.getNextNode());
                 currentNode.setNextNode(newNode);
-                if (tailNode == currentNode) {
-                    tailNode = newNode;
-                }
                 tailIndex++;
                 return;
             }
@@ -171,7 +168,7 @@ class MyLinkedListImpl<E> implements LinkedListImpl<E> {
             return;
         }
 
-        if (headNode.getValue() == value) {
+        if (headNode.getValue().equals(value)) {
             if (tailNode == headNode) {
                 tailNode = tailNode.getNextNode();
             } else {

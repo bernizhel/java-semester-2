@@ -1,7 +1,5 @@
 package ru.vsuet.my_linked_list;
 
-import java.util.Iterator;
-
 public interface LinkedList<E> extends Iterable<E> {
     E getLast();
 

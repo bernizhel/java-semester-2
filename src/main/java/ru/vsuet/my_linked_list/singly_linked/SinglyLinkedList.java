@@ -5,7 +5,7 @@ import ru.vsuet.my_linked_list.LinkedList;
 import java.util.Iterator;
 
 /**
- * Danil Kosenko's (bernizhel's) implementation of the linked list.
+ * Danil Kosenko's (bernizhel's) implementation of the singly linked list.
  *
  * @param <E> which type the elements are in the list
  */

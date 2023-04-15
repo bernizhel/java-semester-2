@@ -1,4 +1,4 @@
-package ru.vsuet.math;
+package ru.vsuet.problem_set_one;
 
 import java.util.Scanner;
 

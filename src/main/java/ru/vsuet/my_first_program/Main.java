@@ -1,4 +1,4 @@
-package ru.vsuet;
+package ru.vsuet.my_first_program;
 
 public class Main {
     public static void main(String[] args) {

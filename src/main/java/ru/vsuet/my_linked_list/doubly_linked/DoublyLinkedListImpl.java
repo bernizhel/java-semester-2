@@ -11,13 +11,13 @@ import java.util.function.Supplier;
  * @param <E> which type the elements are in the list
  */
 class DoublyLinkedListImpl<E> implements Iterable<E> {
-    private DoublyLinkedNode<E> headDoublyLinkedNode;
-    private DoublyLinkedNode<E> tailDoublyLinkedNode;
+    private DoublyLinkedNode<E> headNode;
+    private DoublyLinkedNode<E> tailNode;
     private int size;
 
     public DoublyLinkedListImpl() {
-        this.headDoublyLinkedNode = null;
-        this.tailDoublyLinkedNode = null;
+        this.headNode = null;
+        this.tailNode = null;
         this.size = 0;
     }
 
@@ -27,7 +27,7 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
      * @return {@code Optional<DoublyLinkedNode<E>>} of nullable
      */
     public Optional<DoublyLinkedNode<E>> getLast() {
-        return Optional.ofNullable(tailDoublyLinkedNode);
+        return Optional.ofNullable(tailNode);
     }
 
     /**
@@ -47,19 +47,19 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
      * @param value the new element's value
      */
     public void add(E value) {
-        DoublyLinkedNode<E> newDoublyLinkedNode = new DoublyLinkedNode<>();
-        newDoublyLinkedNode.setValue(value);
+        DoublyLinkedNode<E> newNode = new DoublyLinkedNode<>();
+        newNode.setValue(value);
 
-        if (headDoublyLinkedNode == null) {
-            headDoublyLinkedNode = newDoublyLinkedNode;
-            tailDoublyLinkedNode = newDoublyLinkedNode;
+        if (headNode == null) {
+            headNode = newNode;
+            tailNode = newNode;
             size++;
             return;
         }
 
-        tailDoublyLinkedNode.setNextNode(newDoublyLinkedNode);
-        newDoublyLinkedNode.setPreviousNode(tailDoublyLinkedNode);
-        tailDoublyLinkedNode = newDoublyLinkedNode;
+        tailNode.setNextNode(newNode);
+        newNode.setPreviousNode(tailNode);
+        tailNode = newNode;
         size++;
     }
 
@@ -79,8 +79,8 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
             return;
         }
 
-        DoublyLinkedNode<E> newDoublyLinkedNode = new DoublyLinkedNode<>();
-        newDoublyLinkedNode.setValue(value);
+        DoublyLinkedNode<E> newNode = new DoublyLinkedNode<>();
+        newNode.setValue(value);
 
         DoublyLinkedNode<E> nodeToReplace;
         try {
@@ -90,17 +90,17 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
         }
 
         if (nodeToReplace.getPreviousNode() == null) {
-            newDoublyLinkedNode.setNextNode(headDoublyLinkedNode);
-            headDoublyLinkedNode.setPreviousNode(newDoublyLinkedNode);
-            headDoublyLinkedNode = newDoublyLinkedNode;
+            newNode.setNextNode(headNode);
+            headNode.setPreviousNode(newNode);
+            headNode = newNode;
             size++;
             return;
         }
 
-        newDoublyLinkedNode.setNextNode(nodeToReplace);
-        newDoublyLinkedNode.setPreviousNode(nodeToReplace.getPreviousNode());
-        nodeToReplace.getPreviousNode().setNextNode(newDoublyLinkedNode);
-        nodeToReplace.setPreviousNode(newDoublyLinkedNode);
+        newNode.setNextNode(nodeToReplace);
+        newNode.setPreviousNode(nodeToReplace.getPreviousNode());
+        nodeToReplace.getPreviousNode().setNextNode(newNode);
+        nodeToReplace.setPreviousNode(newNode);
         size++;
     }
 
@@ -145,22 +145,22 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
         }
 
         if (nodeToRemove.getPreviousNode() == null && size == 1) {
-            tailDoublyLinkedNode = null;
-            headDoublyLinkedNode = null;
+            tailNode = null;
+            headNode = null;
             size--;
             return;
         }
 
         if (nodeToRemove.getPreviousNode() == null && size != 1) {
-            headDoublyLinkedNode.getNextNode().setPreviousNode(null);
-            headDoublyLinkedNode = headDoublyLinkedNode.getNextNode();
+            headNode.getNextNode().setPreviousNode(null);
+            headNode = headNode.getNextNode();
             size--;
             return;
         }
 
         if (nodeToRemove.getNextNode() == null) {
-            tailDoublyLinkedNode.getPreviousNode().setNextNode(null);
-            tailDoublyLinkedNode = tailDoublyLinkedNode.getPreviousNode();
+            tailNode.getPreviousNode().setNextNode(null);
+            tailNode = tailNode.getPreviousNode();
             size--;
             return;
         }
@@ -171,17 +171,17 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
     }
 
     private Optional<DoublyLinkedNode<E>> findNode(E value) {
-        DoublyLinkedNode<E> currentDoublyLinkedNode = headDoublyLinkedNode;
+        DoublyLinkedNode<E> currentNode = headNode;
         while (true) {
-            if (currentDoublyLinkedNode == null) {
+            if (currentNode == null) {
                 return Optional.empty();
             }
 
-            if (currentDoublyLinkedNode.getValue().equals(value)) {
-                return Optional.of(currentDoublyLinkedNode);
+            if (currentNode.getValue().equals(value)) {
+                return Optional.of(currentNode);
             }
 
-            currentDoublyLinkedNode = currentDoublyLinkedNode.getNextNode();
+            currentNode = currentNode.getNextNode();
         }
     }
 
@@ -198,21 +198,21 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
     }
 
     private Optional<DoublyLinkedNode<E>> findNodeFromHead(int index) {
-        DoublyLinkedNode<E> currentDoublyLinkedNode = headDoublyLinkedNode;
+        DoublyLinkedNode<E> currentNode = headNode;
         for (int currentIndex = 0; currentIndex < index; currentIndex++) {
-            currentDoublyLinkedNode = currentDoublyLinkedNode.getNextNode();
+            currentNode = currentNode.getNextNode();
         }
 
-        return Optional.ofNullable(currentDoublyLinkedNode);
+        return Optional.ofNullable(currentNode);
     }
 
     private Optional<DoublyLinkedNode<E>> findNodeFromTail(int index) {
-        DoublyLinkedNode<E> currentDoublyLinkedNode = tailDoublyLinkedNode;
+        DoublyLinkedNode<E> currentNode = tailNode;
         for (int currentIndex = size - 1; currentIndex > index; currentIndex--) {
-            currentDoublyLinkedNode = currentDoublyLinkedNode.getPreviousNode();
+            currentNode = currentNode.getPreviousNode();
         }
 
-        return Optional.ofNullable(currentDoublyLinkedNode);
+        return Optional.ofNullable(currentNode);
     }
 
     /**

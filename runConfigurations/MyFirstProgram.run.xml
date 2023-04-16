@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MyFirstProgram" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="ru.vsuet.my_first_program.Main" />
+    <module name="java-semester-2" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

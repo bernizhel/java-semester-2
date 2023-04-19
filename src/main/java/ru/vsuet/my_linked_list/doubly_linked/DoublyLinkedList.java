@@ -10,10 +10,10 @@ import java.util.Iterator;
  * @param <E> which type the elements are in the list
  */
 public class DoublyLinkedList<E> implements LinkedList<E> {
-    private final DoublyLinkedListImpl<E> implementation;
+    private final DoublyLinkedListImpl<E> doublyLinkedListImpl;
 
     public DoublyLinkedList() {
-        this.implementation = new DoublyLinkedListImpl<>();
+        this.doublyLinkedListImpl = new DoublyLinkedListImpl<>();
     }
 
     /**
@@ -22,7 +22,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @return element's value if found, otherwise null
      */
     public E getLast() {
-        return implementation.getLast().orElse(new DoublyLinkedNode<>()).getValue();
+        return doublyLinkedListImpl.getLast().orElse(new DoublyLinkedNode<>()).getValue();
     }
 
     /**
@@ -33,7 +33,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @return element's value if found, otherwise null
      */
     public E get(int index) {
-        return implementation.get(index).orElse(new DoublyLinkedNode<>()).getValue();
+        return doublyLinkedListImpl.get(index).orElse(new DoublyLinkedNode<>()).getValue();
     }
 
     /**
@@ -42,7 +42,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @param value the new element's value
      */
     public void add(E value) {
-        implementation.add(value);
+        doublyLinkedListImpl.add(value);
     }
 
     /**
@@ -56,7 +56,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @param value new element's value
      */
     public void add(int index, E value) {
-        implementation.add(index, value);
+        doublyLinkedListImpl.add(index, value);
     }
 
     /**
@@ -67,7 +67,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @param newValue new value of the element
      */
     public void update(int index, E newValue) {
-        implementation.update(index, newValue);
+        doublyLinkedListImpl.update(index, newValue);
     }
 
     /**
@@ -77,7 +77,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @param value which element's value to search for
      */
     public void remove(E value) {
-        implementation.remove(value);
+        doublyLinkedListImpl.remove(value);
     }
 
     /**
@@ -87,7 +87,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @param index which index to search for the element at
      */
     public void remove(int index) {
-        implementation.remove(index);
+        doublyLinkedListImpl.remove(index);
     }
 
     /**
@@ -96,7 +96,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @return integer value of the list's size
      */
     public int size() {
-        return implementation.size();
+        return doublyLinkedListImpl.size();
     }
 
     /**
@@ -106,7 +106,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @return boolean value
      */
     public boolean isEmpty() {
-        return implementation.isEmpty();
+        return doublyLinkedListImpl.isEmpty();
     }
 
     /**
@@ -115,7 +115,7 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      * @return an Iterator.
      */
     public Iterator<E> iterator() {
-        return implementation.iterator();
+        return doublyLinkedListImpl.iterator();
     }
 
     /**

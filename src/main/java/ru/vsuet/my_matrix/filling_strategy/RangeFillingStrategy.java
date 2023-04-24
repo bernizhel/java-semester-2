@@ -1,4 +1,4 @@
-package ru.vsuet.my_matrix.integer_matrix;
+package ru.vsuet.my_matrix.filling_strategy;
 
 import ru.vsuet.my_matrix.FillingStrategy;
 

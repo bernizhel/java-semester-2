@@ -1,6 +1,6 @@
 package ru.vsuet.my_matrix.integer_matrix;
 
-import ru.vsuet.my_matrix.interfaces.FillingStrategy;
+import ru.vsuet.my_matrix.FillingStrategy;
 
 import java.util.Random;
 

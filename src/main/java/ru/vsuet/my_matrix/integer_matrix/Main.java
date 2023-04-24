@@ -1,6 +1,6 @@
 package ru.vsuet.my_matrix.integer_matrix;
 
-import ru.vsuet.my_matrix.interfaces.FillingStrategy;
+import ru.vsuet.my_matrix.FillingStrategy;
 
 public class Main {
     public static void main(String[] args) {

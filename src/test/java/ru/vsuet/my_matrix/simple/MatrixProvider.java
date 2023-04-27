@@ -1,4 +1,4 @@
-package ru.vsuet.my_matrix;
+package ru.vsuet.my_matrix.simple;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;

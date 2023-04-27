@@ -4,7 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-import ru.vsuet.my_matrix.integer_matrix.IntegerMatrix;
+import ru.vsuet.my_matrix.simple.FillingStrategy;
+import ru.vsuet.my_matrix.simple.Matrix;
+import ru.vsuet.my_matrix.simple.integer_matrix.IntegerMatrix;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class IntegerMatrixTest {

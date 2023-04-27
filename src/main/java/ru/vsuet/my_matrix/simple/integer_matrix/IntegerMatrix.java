@@ -1,7 +1,7 @@
-package ru.vsuet.my_matrix.integer_matrix;
+package ru.vsuet.my_matrix.simple.integer_matrix;
 
-import ru.vsuet.my_matrix.FillingStrategy;
-import ru.vsuet.my_matrix.Matrix;
+import ru.vsuet.my_matrix.simple.FillingStrategy;
+import ru.vsuet.my_matrix.simple.Matrix;
 
 public class IntegerMatrix implements Matrix<Integer> {
     private final int[][] matrix;

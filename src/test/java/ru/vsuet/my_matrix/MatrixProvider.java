@@ -3,8 +3,8 @@ package ru.vsuet.my_matrix;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
-import ru.vsuet.my_matrix.filling_strategy.ConstantFillingStrategy;
-import ru.vsuet.my_matrix.filling_strategy.RangeFillingStrategy;
+import ru.vsuet.my_matrix.simple.filling_strategy.ConstantFillingStrategy;
+import ru.vsuet.my_matrix.simple.filling_strategy.RangeFillingStrategy;
 
 import java.util.stream.Stream;
 

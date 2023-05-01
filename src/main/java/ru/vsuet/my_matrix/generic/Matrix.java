@@ -1,15 +1,22 @@
 package ru.vsuet.my_matrix.generic;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+//import java.lang.reflect.Constructor;
+//import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
 public class Matrix<N extends Number> {
     private final N[][] matrix;
     private final N constantValue;
 
-    public Matrix(N constantValue, int size) throws ClassCastException {
-        this.matrix = (N[][])Array.newInstance(constantValue.getClass(), size, size);
+//    @SuppressWarnings({})
+    public Matrix(N constantValue, int size) throws IllegalArgumentException {
+        try {
+            this.matrix = (N[][]) Array.newInstance(constantValue.getClass(), size, size);
+        } catch (ClassCastException exception) {
+            throw new IllegalArgumentException();
+        }
+
         this.constantValue = constantValue;
     }
 
@@ -21,11 +28,7 @@ public class Matrix<N extends Number> {
 //            return;
 //        }
 
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; i < matrix[i].length; j++) {
-                matrix[i][j] = constantValue;
-            }
-        }
+        Arrays.stream(matrix).forEach(row -> Arrays.fill(row, constantValue));
     }
 
     public N[][] getMatrix() {

@@ -18,21 +18,6 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
     }
 
     /**
-     * Returns value of the last element in the list.
-     *
-     * @return element's value if found, otherwise null
-     * @throws IndexOutOfBoundsException if the list's size is zero
-     */
-    public E getLast() throws IndexOutOfBoundsException {
-        Optional<DoublyLinkedNode<E>> result = doublyLinkedListImpl.getLast();
-        if (result.isEmpty()) {
-            throw new IndexOutOfBoundsException();
-        }
-
-        return result.get().getValue();
-    }
-
-    /**
      * Returns an element's value positioned at the specific {@code index}.
      *
      * @param index which index to search the element at
@@ -69,20 +54,6 @@ public class DoublyLinkedList<E> implements LinkedList<E> {
      */
     public void add(int index, E value) {
         boolean result = doublyLinkedListImpl.add(index, value);
-        if (!result) {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
-    /**
-     * Updates value of an element positioned at the {@code index} with the {@code newValue}.
-     *
-     * @param index which index to search element at
-     * @param newValue new value of the element
-     * @throws IndexOutOfBoundsException if the {@code index} is out of range
-     */
-    public void update(int index, E newValue) {
-        boolean result = doublyLinkedListImpl.update(index, newValue);
         if (!result) {
             throw new IndexOutOfBoundsException();
         }

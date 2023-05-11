@@ -21,15 +21,6 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
     }
 
     /**
-     * Returns value of the last element in the list.
-     *
-     * @return {@code Optional<DoublyLinkedNode<E>>} of nullable
-     */
-    public Optional<DoublyLinkedNode<E>> getLast() {
-        return Optional.ofNullable(tailNode);
-    }
-
-    /**
      * Returns an element's value positioned at the specific {@code index}.
      * If the {@code index} is out of bounds, returns {@code Optional.empty()}.
      *
@@ -102,20 +93,6 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
         nodeToReplace.setPreviousNode(newNode);
         size++;
         return true;
-    }
-
-    /**
-     * Updates value of an element positioned at the {@code index} with the {@code newValue}.
-     * If the {@code index} is out of bounds, returns {@code false}.
-     *
-     * @param index which index to search element at
-     * @param newValue new value of the element
-     * @return {@code true} if {@code index} is within the list's size
-     */
-    public boolean update(int index, E newValue) {
-        Optional<DoublyLinkedNode<E>> nodeToUpdate = findNode(index);
-        nodeToUpdate.ifPresent(eDoublyLinkedNode -> eDoublyLinkedNode.setValue(newValue));
-        return nodeToUpdate.isPresent();
     }
 
     /**

@@ -19,7 +19,6 @@ public class LinkedListTest {
     public void getState_whenEmpty_throwsException(LinkedList<String> linkedList) {
         assertTrue(linkedList.isEmpty());
         assertEquals(0, linkedList.size());
-        assertThrows(IndexOutOfBoundsException.class, linkedList::getLast);
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
@@ -32,7 +31,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(1, linkedList.size());
-        assertEquals(TestConstants.FIRST, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
@@ -45,25 +43,10 @@ public class LinkedListTest {
 
         assertTrue(linkedList.isEmpty());
         assertEquals(0, linkedList.size());
-        assertThrows(IndexOutOfBoundsException.class, linkedList::getLast);
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
     }
-
-    @ParameterizedTest
-    @ArgumentsSource(LinkedListProvider.class)
-    public void getState_whenUpdatedNonExistent_throwsException(LinkedList<String> linkedList) {
-        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.update(0, TestConstants.FIRST_UPDATED));
-
-        assertTrue(linkedList.isEmpty());
-        assertEquals(0, linkedList.size());
-        assertThrows(IndexOutOfBoundsException.class, linkedList::getLast);
-        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(0));
-        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
-        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
-    }
-
 
     @ParameterizedTest
     @ArgumentsSource(LinkedListProvider.class)
@@ -72,7 +55,6 @@ public class LinkedListTest {
 
         assertTrue(linkedList.isEmpty());
         assertEquals(0, linkedList.size());
-        assertThrows(IndexOutOfBoundsException.class, linkedList::getLast);
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
@@ -85,7 +67,6 @@ public class LinkedListTest {
 
         assertTrue(linkedList.isEmpty());
         assertEquals(0, linkedList.size());
-        assertThrows(IndexOutOfBoundsException.class, linkedList::getLast);
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
@@ -99,7 +80,6 @@ public class LinkedListTest {
 
         assertTrue(linkedList.isEmpty());
         assertEquals(0, linkedList.size());
-        assertThrows(IndexOutOfBoundsException.class, linkedList::getLast);
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
@@ -113,7 +93,6 @@ public class LinkedListTest {
 
         assertTrue(linkedList.isEmpty());
         assertEquals(0, linkedList.size());
-        assertThrows(IndexOutOfBoundsException.class, linkedList::getLast);
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
@@ -128,7 +107,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(1, linkedList.size());
-        assertEquals(TestConstants.SECOND, linkedList.getLast());
         assertEquals(TestConstants.SECOND, linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
@@ -143,7 +121,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(1, linkedList.size());
-        assertEquals(TestConstants.SECOND, linkedList.getLast());
         assertEquals(TestConstants.SECOND, linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
@@ -158,7 +135,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(2, linkedList.size());
-        assertEquals(TestConstants.SECOND, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertEquals(TestConstants.SECOND, linkedList.get(1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
@@ -173,7 +149,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(2, linkedList.size());
-        assertEquals(TestConstants.SECOND, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertEquals(TestConstants.SECOND, linkedList.get(1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
@@ -188,7 +163,6 @@ public class LinkedListTest {
 
         assertTrue(linkedList.isEmpty());
         assertEquals(0, linkedList.size());
-        assertThrows(IndexOutOfBoundsException.class, linkedList::getLast);
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(1));
@@ -203,30 +177,9 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(3, linkedList.size());
-        assertEquals(TestConstants.THIRD, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertEquals(TestConstants.SECOND, linkedList.get(1));
         assertEquals(TestConstants.THIRD, linkedList.get(2));
-        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
-        assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(3));
-    }
-
-    @ParameterizedTest
-    @ArgumentsSource(LinkedListProvider.class)
-    public void getState_whenAddAndUpdateThree_throwsException(LinkedList<String> linkedList) {
-        assertTrue(linkedList.add(TestConstants.FIRST));
-        assertTrue(linkedList.add(TestConstants.SECOND));
-        assertTrue(linkedList.add(TestConstants.THIRD));
-        linkedList.update(0, TestConstants.FIRST_UPDATED);
-        linkedList.update(1, TestConstants.SECOND_UPDATED);
-        linkedList.update(2, TestConstants.THIRD_UPDATED);
-
-        assertFalse(linkedList.isEmpty());
-        assertEquals(3, linkedList.size());
-        assertEquals(TestConstants.THIRD_UPDATED, linkedList.getLast());
-        assertEquals(TestConstants.FIRST_UPDATED, linkedList.get(0));
-        assertEquals(TestConstants.SECOND_UPDATED, linkedList.get(1));
-        assertEquals(TestConstants.THIRD_UPDATED, linkedList.get(2));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(3));
     }
@@ -241,7 +194,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(2, linkedList.size());
-        assertEquals(TestConstants.THIRD, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertEquals(TestConstants.THIRD, linkedList.get(1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
@@ -258,7 +210,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(2, linkedList.size());
-        assertEquals(TestConstants.THIRD, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertEquals(TestConstants.THIRD, linkedList.get(1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
@@ -275,7 +226,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(2, linkedList.size());
-        assertEquals(TestConstants.SECOND, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertEquals(TestConstants.SECOND, linkedList.get(1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
@@ -292,7 +242,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(2, linkedList.size());
-        assertEquals(TestConstants.SECOND, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertEquals(TestConstants.SECOND, linkedList.get(1));
         assertThrows(IndexOutOfBoundsException.class, () -> linkedList.get(-1));
@@ -309,7 +258,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(4, linkedList.size());
-        assertEquals(TestConstants.FOURTH, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertEquals(TestConstants.SECOND, linkedList.get(1));
         assertEquals(TestConstants.THIRD, linkedList.get(2));
@@ -328,7 +276,6 @@ public class LinkedListTest {
 
         assertFalse(linkedList.isEmpty());
         assertEquals(4, linkedList.size());
-        assertEquals(TestConstants.FOURTH, linkedList.getLast());
         assertEquals(TestConstants.FIRST, linkedList.get(0));
         assertEquals(TestConstants.SECOND, linkedList.get(1));
         assertEquals(TestConstants.THIRD, linkedList.get(2));
@@ -372,7 +319,6 @@ public class LinkedListTest {
 
         assertTrue(doublyLinkedList.isEmpty());
         assertEquals(0, doublyLinkedList.size());
-        assertThrows(IndexOutOfBoundsException.class, doublyLinkedList::getLast);
         assertThrows(IndexOutOfBoundsException.class, () -> doublyLinkedList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> doublyLinkedList.get(-1));
         assertThrows(IndexOutOfBoundsException.class, () -> doublyLinkedList.get(1));
@@ -388,7 +334,6 @@ public class LinkedListTest {
 
         assertFalse(doublyLinkedList.isEmpty());
         assertEquals(3, doublyLinkedList.size());
-        assertEquals(TestConstants.THIRD, doublyLinkedList.getLast());
         assertEquals(TestConstants.FIRST, doublyLinkedList.get(0));
         assertEquals(TestConstants.SECOND, doublyLinkedList.get(1));
         assertEquals(TestConstants.THIRD, doublyLinkedList.get(2));

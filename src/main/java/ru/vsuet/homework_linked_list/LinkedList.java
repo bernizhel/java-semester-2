@@ -4,14 +4,6 @@ import ru.vsuet.homework_linked_list.doubly_linked.DoublyLinkedList;
 
 public interface LinkedList<E> extends Iterable<E> {
     /**
-     * Returns value of the last element in the list.
-     *
-     * @return element's value if found, otherwise null
-     * @throws IndexOutOfBoundsException if the list's size is zero
-     */
-    E getLast();
-
-    /**
      * Returns an element's value positioned at the specific {@code index}.
      *
      * @param index which index to search the element at
@@ -38,15 +30,6 @@ public interface LinkedList<E> extends Iterable<E> {
      * @throws IndexOutOfBoundsException if the {@code index} is out of range
      */
     void add(int index, E value);
-
-    /**
-     * Updates value of an element positioned at the {@code index} with the {@code newValue}.
-     *
-     * @param index    which index to search element at
-     * @param newValue new value of the element
-     * @throws IndexOutOfBoundsException if the {@code index} is out of range
-     */
-    void update(int index, E newValue);
 
     /**
      * Removes the first element with the given {@code value}.

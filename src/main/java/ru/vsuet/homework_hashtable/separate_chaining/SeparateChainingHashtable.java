@@ -7,6 +7,7 @@ import ru.vsuet.homework_hashtable.hashing_algorithm.HashingAlgorithm;
 import ru.vsuet.homework_hashtable.hashtable_size_generator.HashtableSizeGenerator;
 import ru.vsuet.homework_linked_list.doubly_linked.DoublyLinkedList;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -73,6 +74,10 @@ public class SeparateChainingHashtable<K, V> implements IHashtable<K, V> {
         this.table = new DoublyLinkedList[initialCapacity];
         this.loadFactor = loadFactor;
         this.hashtableSizeGenerator = new HashtableSizeGenerator(initialCapacity);
+
+        for (int index = 0; index < table.length; index++) {
+            table[index] = new DoublyLinkedList<>();
+        }
     }
 
     /**
@@ -106,7 +111,7 @@ public class SeparateChainingHashtable<K, V> implements IHashtable<K, V> {
         int index = getIndex(key, table.length);
         for (Entry<K, V> entry : table[index]) {
             if (Objects.equals(entry.getKey(), key)) {
-                return entry.value();
+                return entry.getValue();
             }
         }
 
@@ -149,10 +154,21 @@ public class SeparateChainingHashtable<K, V> implements IHashtable<K, V> {
         for (Entry<K, V> entry : table[index]) {
             if (Objects.equals(entry.getKey(), key)) {
                 table[index].remove(entry);
+                elementsCount--;
+                return;
             }
         }
 
         throw new NoSuchKeyException("No such key: " + key);
+    }
+
+    /**
+     * Get table's elements count.
+     *
+     * @return {@inheritDoc}
+     */
+    public int size() {
+        return elementsCount;
     }
 
     /**
@@ -162,7 +178,7 @@ public class SeparateChainingHashtable<K, V> implements IHashtable<K, V> {
      * @return index to put the key value entry into
      */
     private int getIndex(K key, int tableLength) {
-        int hashCode = HashingAlgorithm.hashCode(key);
+        int hashCode = Math.abs(HashingAlgorithm.hashCode(key));
         return hashCode % tableLength;
     }
 
@@ -186,6 +202,9 @@ public class SeparateChainingHashtable<K, V> implements IHashtable<K, V> {
     private void rehash() {
         int newSize = hashtableSizeGenerator.getNext();
         DoublyLinkedList<Entry<K, V>>[] newTable = new DoublyLinkedList[newSize];
+        for (int index = 0; index < newTable.length; index++) {
+            newTable[index] = new DoublyLinkedList<>();
+        }
 
         for (DoublyLinkedList<Entry<K, V>> entries : table) {
             for (Entry<K, V> entry : entries) {
@@ -232,5 +251,15 @@ public class SeparateChainingHashtable<K, V> implements IHashtable<K, V> {
         public int hashCode() {
             return Objects.hash(key, value);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "SeparateChainingHashtable{" +
+                "loadFactor=" + loadFactor +
+                ", hashtableSizeGenerator=" + hashtableSizeGenerator +
+                ", table=" + Arrays.toString(table) +
+                ", elementsCount=" + elementsCount +
+                '}';
     }
 }

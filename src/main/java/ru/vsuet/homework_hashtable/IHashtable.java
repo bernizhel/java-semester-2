@@ -39,6 +39,13 @@ public interface IHashtable<K, V> {
     void remove(K key);
 
     /**
+     * Get the table's size.
+     *
+     * @return table's size
+     */
+    int size();
+
+    /**
      * Entry is used to store key value entries inside a hashtable.
      *
      * @param <K> key type

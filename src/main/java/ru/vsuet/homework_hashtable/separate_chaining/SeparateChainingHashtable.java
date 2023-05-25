@@ -7,7 +7,6 @@ import ru.vsuet.homework_hashtable.hashing_algorithm.HashingAlgorithm;
 import ru.vsuet.homework_hashtable.hashtable_size_generator.HashtableSizeGenerator;
 import ru.vsuet.homework_linked_list.doubly_linked.DoublyLinkedList;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -251,15 +250,5 @@ public class SeparateChainingHashtable<K, V> implements IHashtable<K, V> {
         public int hashCode() {
             return Objects.hash(key, value);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "SeparateChainingHashtable{" +
-                "loadFactor=" + loadFactor +
-                ", hashtableSizeGenerator=" + hashtableSizeGenerator +
-                ", table=" + Arrays.toString(table) +
-                ", elementsCount=" + elementsCount +
-                '}';
     }
 }

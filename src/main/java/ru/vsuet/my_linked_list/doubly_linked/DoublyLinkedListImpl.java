@@ -1,9 +1,7 @@
 package ru.vsuet.my_linked_list.doubly_linked;
 
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 /**
  * Danil Kosenko's (bernizhel's) implementation of the doubly linked list.
@@ -82,12 +80,11 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
         DoublyLinkedNode<E> newNode = new DoublyLinkedNode<>();
         newNode.setValue(value);
 
-        DoublyLinkedNode<E> nodeToReplace;
-        try {
-            nodeToReplace = findNode(index).get();
-        } catch (NoSuchElementException exception) {
+        Optional<DoublyLinkedNode<E>> foundNodeToReplace = findNode(index);
+        if (foundNodeToReplace.isEmpty()) {
             return;
         }
+        DoublyLinkedNode<E> nodeToReplace = foundNodeToReplace.get();
 
         if (nodeToReplace.getPreviousNode() == null) {
             newNode.setNextNode(headNode);
@@ -113,7 +110,9 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
      */
     public void update(int index, E newValue) {
         Optional<DoublyLinkedNode<E>> nodeToUpdate = findNode(index);
-        nodeToUpdate.ifPresent(doublyLinkedNode -> doublyLinkedNode.setValue(newValue));
+        if (nodeToUpdate.isPresent()) {
+            nodeToUpdate.get().setValue(newValue);
+        }
     }
 
     /**
@@ -123,7 +122,8 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
      * @param value which element's value to search for
      */
     public void remove(E value) {
-        removeNodeTemplate(() -> findNode(value).orElse(null));
+        Optional<DoublyLinkedNode<E>> nodeToRemove = findNode(value);
+        removeNode(nodeToRemove.orElse(null));
     }
 
     /**
@@ -133,11 +133,11 @@ class DoublyLinkedListImpl<E> implements Iterable<E> {
      * @param index which index to search for the element at
      */
     public void remove(int index) {
-        removeNodeTemplate(() -> findNode(index).orElse(null));
+        Optional<DoublyLinkedNode<E>> nodeToRemove = findNode(index);
+        removeNode(nodeToRemove.orElse(null));
     }
 
-    private void removeNodeTemplate(Supplier<DoublyLinkedNode<E>> nodeToRemoveSupplier) {
-        DoublyLinkedNode<E> nodeToRemove = nodeToRemoveSupplier.get();
+    private void removeNode(DoublyLinkedNode<E> nodeToRemove) {
         try {
             Objects.requireNonNull(nodeToRemove);
         } catch (NullPointerException exception) {

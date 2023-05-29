@@ -2,8 +2,8 @@ package ru.vsuet.my_linked_list.doubly_linked;
 
 class DoublyLinkedNode<T> {
     private T value;
-    private DoublyLinkedNode<T> nextDoublyLinkedNode;
-    private DoublyLinkedNode<T> previousDoublyLinkedNode;
+    private DoublyLinkedNode<T> nextNode;
+    private DoublyLinkedNode<T> previousNode;
 
     public T getValue() {
         return value;
@@ -14,18 +14,18 @@ class DoublyLinkedNode<T> {
     }
 
     public DoublyLinkedNode<T> getNextNode() {
-        return nextDoublyLinkedNode;
+        return nextNode;
     }
 
-    public void setNextNode(DoublyLinkedNode<T> nextDoublyLinkedNode) {
-        this.nextDoublyLinkedNode = nextDoublyLinkedNode;
+    public void setNextNode(DoublyLinkedNode<T> nextNode) {
+        this.nextNode = nextNode;
     }
 
     public DoublyLinkedNode<T> getPreviousNode() {
-        return previousDoublyLinkedNode;
+        return previousNode;
     }
 
-    public void setPreviousNode(DoublyLinkedNode<T> previousDoublyLinkedNode) {
-        this.previousDoublyLinkedNode = previousDoublyLinkedNode;
+    public void setPreviousNode(DoublyLinkedNode<T> previousNode) {
+        this.previousNode = previousNode;
     }
 }
